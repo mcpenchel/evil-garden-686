@@ -6,4 +6,16 @@
   </div>
 </div>
 
+<% @garden.plants.each do |plant| %>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= plant.image_url %>')">
+    <%= plant.name %> <%= link_to 'Dig it up', plant_path(plant), method: :delete, data: { confirm: "Are you sure?" } %>
+  </div>
+<% end %>
+
+<%= simple_form_for([@garden, @plant]) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :image_url %>
+  <%= f.submit 'Create a plant' %>
+<% end %>
+
 <%= link_to 'Back', gardens_path %>
